@@ -30,12 +30,15 @@
   <machine name="localhost" address="localhost" if="$(arg use_machine)"/>
 
   <node pkg="nodelet" type="nodelet" name="$(arg nodelet_manager)" args="manager"
-        if="$(arg start_manager)" machine="$(arg machine)" output="screen"/>
+        if="$(arg start_manager)" machine="$(arg machine)"  />
 
-  <!-- Nodelet version of kinect2_bridge -->
+  <!-- Nodelet version of kinect2_bridge    output="$(arg output)" -->
   <node pkg="nodelet" type="nodelet" name="$(arg base_name)_bridge" machine="$(arg machine)"
         args="load kinect2_bridge/kinect2_bridge_nodelet $(arg nodelet_manager)"
-        respawn="$(arg respawn)" output="$(arg output)" if="$(arg use_nodelet)">
+        respawn="$(arg respawn)" 
+       
+        if="$(arg use_nodelet)"> 
+       
     <param name="base_name"         type="str"    value="$(arg base_name)"/>
     <param name="sensor"            type="str"    value="$(arg sensor)"/>
     <param name="publish_tf"        type="bool"   value="$(arg publish_tf)"/>
@@ -57,9 +60,9 @@
     <param name="worker_threads"    type="int"    value="$(arg worker_threads)"/>
   </node>
 
-  <!-- Node version of kinect2_bridge -->
+  <!-- Node version of kinect2_bridge     output="$(arg output)"    -->
   <node pkg="kinect2_bridge" type="kinect2_bridge" name="$(arg base_name)_bridge" machine="$(arg machine)"
-        respawn="$(arg respawn)" output="$(arg output)" unless="$(arg use_nodelet)">
+        respawn="$(arg respawn)" unless="$(arg use_nodelet)">
     <param name="base_name"         type="str"    value="$(arg base_name)"/>
     <param name="sensor"            type="str"    value="$(arg sensor)"/>
     <param name="publish_tf"        type="bool"   value="$(arg publish_tf)"/>

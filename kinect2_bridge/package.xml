@@ -35,5 +35,6 @@
 
   <export>
     <nodelet plugin="${prefix}/nodelet_plugins.xml" />
+    <!-- <nodelet plugin="${prefix}/nodelets.xml"/> -->
   </export>
 </package>
